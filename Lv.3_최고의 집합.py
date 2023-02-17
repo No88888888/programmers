@@ -52,18 +52,23 @@ n	s	result
 #     print(answer)
 #     return answer
 
+'''
+합이 s가 되는 자연수 n개의 조합 중 각 수들의 곱이 최대가 되는 경우는
+각 수들의 차가 최소가 되는 조합이다
+s를 n으로 나눈 몫과 나머지를 이용하여 푸는 방식으로 접근한다
+'''
 def solution(n,s):
-    if s%n == 0:
-        A = s//n #몫과 나머지
-        answer = [A]*n
-    elif s//n == 0:
-        answer = [-1]
-    else:
-        A = s%n # 나머지
-        B = s//n # 몫
-        answer = [B]*(n-1)
-        C = B+A
-        answer.append(C)
+    if s%n == 0:        # 나머지가 없다면(나눠 떨어진다면) 
+        A = s//n    
+        answer = [A]*n  # 몫 A가 n개로만 이뤄진 조합이 답
+    elif s//n == 0:     # 몫이 0이라면    
+        answer = [-1]   # 조합 불가능
+    else:               # 나머지가 있다면(나눠 떨어지지 않는다면)
+        A = s//n        # 몫   
+        B = s%n         # 나머지
+        answer = [A]*(n-B)  # 전체개수에서 나머지만큼 뺀 개수만큼 A를 채우고
+        plus = [A+1]*B      # (나머지 B를 A네게 1씩 나눠 더해준다) * B 개수
+        answer.extend(plus) # 답 배열 뒤에 추가해준다
     return answer
 
 solution(4, 10)
