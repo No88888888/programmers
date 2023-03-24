@@ -67,7 +67,7 @@ def solution(n,s):
         A = s//n        # 몫   
         B = s%n         # 나머지
         answer = [A]*(n-B)  # 전체개수에서 나머지만큼 뺀 개수만큼 A를 채우고
-        plus = [A+1]*B      # (나머지 B를 A네게 1씩 나눠 더해준다) * B 개수
+        plus = [A+1]*B      # (나머지 B를 A에게 1씩 나눠 더해준다) * B 개수
         answer.extend(plus) # 답 배열 뒤에 추가해준다
     return answer
 
