@@ -59,6 +59,20 @@
 -- WHERE REPLY.CREATE_DATE LIKE '2022-10-%'
 -- ORDER BY REPLY.CREATE_DATE, TITLE
 
+
+
+select ugb.title, 
+ugb.board_id, 
+ugr.reply_id, 
+ugr.writer_id,
+ugr.contents, 
+date_format(ugr.created_date, '%Y-%m-%d')
+from used_goods_board ugb
+join used_goods_reply ugr
+where ugb.created_date like '2022-10-%'
+order by ugr.created_date, ugb.title;
+
+
 SELECT 
 TITLE,
 BOARD.BOARD_ID, 
