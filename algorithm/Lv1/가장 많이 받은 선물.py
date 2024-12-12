@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 def solution(friends, gifts):
     N = len(friends)
     numbering_table = {}
@@ -19,20 +17,25 @@ def solution(friends, gifts):
         for j in range(N):
             org[i][0] += gift_table[i][j]
             org[i][1] += gift_table[j][i]
-            org[j][1] += gift_table[j][i]
-            org[j][0] += gift_table[i][j]
 
         org[i][2] = org[i][0] - org[i][1]
-        org[j][2] = org[j][0] - org[j][1]
-        if gift_table[i][j] > gift_table[j][i]:
-            answer_arr[i] += 1
-        elif gift_table[i][j] < gift_table[j][i]:
-            answer_arr[j] += 1
-        else:
-            pass
-    for k in range(N):
 
-    answer = 0
+    for p in range(N):
+        for q in range(p, N):
+            if gift_table[p][q] > gift_table[q][p]:
+                answer_arr[p] += 1
+            elif gift_table[p][q] < gift_table[q][p]:
+                answer_arr[q] += 1
+            else:
+                if org[p][2] > org[q][2]:
+                    answer_arr[p] += 1
+                elif org[p][2] < org[q][2]:
+                    answer_arr[q] += 1
+
+    answer = max(answer_arr)
+
     return answer
 
 solution(["muzi", "ryan", "frodo", "neo"], ["muzi frodo", "muzi frodo", "ryan muzi", "ryan muzi", "ryan muzi", "frodo muzi", "frodo ryan", "neo muzi"])
+solution(["joy", "brad", "alessandro", "conan", "david"], ["alessandro brad", "alessandro joy", "alessandro conan", "david alessandro", "alessandro david"])
+solution(["a", "b", "c"],["a b", "b a", "c a", "a c", "a c", "c a"])
